@@ -13,12 +13,12 @@ export class FeedService {
     private http: HttpClient
   ) { }
 
-  getFeedContent(url: string): Observable<any> {
+  getFeedContent(url: string): Observable<Feed> {
     return this.http.get(this.rssToJsonServiceBaseUrl + url)
       .pipe(
-        map((data:Response) =>{
-          console.log('data: ', data);
-          return data;
+        map((data: any) => {
+          console.log('data: ', (data as Feed));
+          return data as Feed;
         }),
         catchError(this.handleError)
       );
